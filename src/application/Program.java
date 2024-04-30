@@ -14,20 +14,20 @@ public class Program {
         try {
             SellerDao sellerDao = DaoFactory.createSellerDao();
 
-            System.out.println("=== TEST 1:  Seller findById ===");
+            System.out.println("=== TEST 1: Seller findById ===");
             Seller seller = sellerDao.findById(3);
             System.out.println(seller);
 
-            System.out.println("\n=== TEST 2:  Seller findByDepartment ===");
+            System.out.println("\n=== TEST 2: Seller findByDepartment ===");
             Department dep = new Department(1, "Computers");
             List<Seller> sellerList = sellerDao.findByDepartment(dep);
             sellerList.forEach(System.out::println);
 
-            System.out.println("\n=== TEST 3:  Seller findAll ===");
+            System.out.println("\n=== TEST 3: Seller findAll ===");
             sellerList = sellerDao.findAll();
             sellerList.forEach(System.out::println);
 
-            System.out.println("\n=== TEST 4:  Seller insert ===");
+            System.out.println("\n=== TEST 4: Seller insert ===");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             seller = new Seller(
                     null,
@@ -40,11 +40,14 @@ public class Program {
             sellerDao.insert(seller);
             System.out.println("Inserted! New id = " + seller.getId());
 
-            System.out.println("\n=== TEST 5:  Seller update ===");
+            System.out.println("\n=== TEST 5: Seller update ===");
             seller = sellerDao.findById(9);
             seller.setName("Richard Fuchsia");
             seller.setEmail("richard@gmail.com");
             sellerDao.update(seller);
+
+            System.out.println("\n=== TEST 6: Seller delete ===");
+            sellerDao.deleteById(16);
         } catch (ParseException e) {
             e.printStackTrace();
         }
