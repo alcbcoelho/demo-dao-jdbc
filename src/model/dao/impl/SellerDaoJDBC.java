@@ -52,14 +52,8 @@ public class SellerDaoJDBC implements SellerDao {
            rs = st.executeQuery();
 
            if (rs.next()) {
-               return new Seller(
-                       rs.getInt("Id"),
-                       rs.getString("Name"),
-                       rs.getString("Email"),
-                       rs.getDate("BirthDate"),
-                       rs.getDouble("BaseSalary"),
-                       new Department(rs.getInt("DepartmentId"), rs.getString("DepName"))
-               );
+               Department dep = instantiateDepartment(rs);
+               return instantiateSeller(rs, dep);
            }
            return null;
         } catch (SQLException e) {
@@ -71,6 +65,21 @@ public class SellerDaoJDBC implements SellerDao {
             // assim, fecha-se a conexão no programa principal, quando a instância do DAO tiver
             // concluído todas as operações desejadas.
         }
+    }
+
+    private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+        return new Seller(
+                rs.getInt("Id"),
+                rs.getString("Name"),
+                rs.getString("Email"),
+                rs.getDate("BirthDate"),
+                rs.getDouble("BaseSalary"),
+                dep
+        );
+    }
+
+    private Department instantiateDepartment(ResultSet rs) throws SQLException {
+        return new Department(rs.getInt("DepartmentId"), rs.getString("DepName"));
     }
 
     @Override
