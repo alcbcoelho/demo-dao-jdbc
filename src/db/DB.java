@@ -22,15 +22,15 @@ public class DB {
         return conn;
     }
 
-    public static void closeConnection() {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                throw new DbException(e.getMessage());
-            }
-        }
-    }
+//    public static void closeConnection() {
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//                throw new DbException(e.getMessage());
+//            }
+//        }
+//    }
 
     // método p/ passar as propriedades do arquivo db.properties p/ um objeto Properties
     private static Properties loadProperties() {
@@ -44,33 +44,32 @@ public class DB {
     }
 
     // método para fechar Statements
-    public static void closeStatement(Statement st) {
-        if (st != null) {
-            try {
-                st.close();
-            } catch (SQLException e) {
-                throw new DbException(e.getMessage());
-            }
-        }
-    }
+//    public static void closeStatement(Statement st) {
+//        if (st != null) {
+//            try {
+//                st.close();
+//            } catch (SQLException e) {
+//                throw new DbException(e.getMessage());
+//            }
+//        }
+//    }
 
     // método para fechar ResultSets
-    public static void closeResultSet(ResultSet rs) {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                throw new DbException(e.getMessage());
-            }
-        }
-    }
+//    public static void closeResultSet(ResultSet rs) {
+//        if (rs != null) {
+//            try {
+//                rs.close();
+//            } catch (SQLException e) {
+//                throw new DbException(e.getMessage());
+//            }
+//        }
+//    }
 
     // MÉTODO CLOSE PRA QUALQUER COISA (Statements, ResultSet, Connection)
     public static <T extends AutoCloseable> void close(T obj) {
         if (obj != null) {
             try {
                 obj.close();
-                System.out.println("closed " + obj.getClass());     //
             } catch (Exception e) {
                 throw new DbException(e.getMessage());
             }
